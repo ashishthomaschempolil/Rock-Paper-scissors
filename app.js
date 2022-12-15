@@ -28,18 +28,19 @@ function playRound(playerSelection, computerSelection) {
     }
     
     if (playerSelection == computerSelection) {
-        return ("It's a Tie", 'tie')
+        return ["It's a Tie", 'tie']
     }
     else if (beat_direct[playerSelection] == computerSelection) {
-        return (`You Win, ${playerSelection} beats ${computerSelection}`, 'player')
+        return [`You Win, ${playerSelection} beats ${computerSelection}`, 'player']
     }
     else {
-        return (`You Lose, ${computerSelection} beats ${playerSelection}`, 'computer')
+        return [`You Lose, ${computerSelection} beats ${playerSelection}`, 'computer']
     }
 }
 
 /**
  * This function plays 5 rounds of rock, paper, scissor and prints the result
+ * @returns {None}: NULL
  */
 function game() {
     playerTotalWins = 0
@@ -49,7 +50,7 @@ function game() {
         const playerSelection = prompt("Rock, Paper or Scissor?")
         const computerSelection = getComputerChoice()
         const result = playRound(playerSelection, computerSelection)
-        
+
         if (result[1] == 'player') {
             playerTotalWins += 1
         }
@@ -62,13 +63,13 @@ function game() {
     }
 
     if (playerTotalWins > computerTotalWins) {
-        console.log("You Win!")
+        console.log("The final result is: You Win!")
     }
     else if (playerTotalWins < computerTotalWins) {
-        console.log("You Lose!")
+        console.log("The final result is: You Lose!")
     }
     else {
-        console.log("It's a Tie!")
+        console.log("The final result is: It's a Tie!")
 }   
 }
 
