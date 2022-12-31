@@ -1,3 +1,19 @@
+// rock beats scissor
+// paper beats rock
+// scissor beats rock
+
+const beat_direct = {
+    'rock': 'scissor',
+    'paper': 'rock',
+    'scissor': 'paper'
+}
+
+const idToSymbols = {
+    'rock': '🪨',
+    'paper': '📃',
+    'scissor': '✂️'
+}
+
 /**
  * This function return a random choice of rock, paper or scissor
  * @returns {String}: computer's choice of rock, paper or scissor 
@@ -18,63 +34,79 @@ function getComputerChoice() {
 function playRound(playerSelection, computerSelection) {
     playerSelection = playerSelection.toLowerCase()
 
-    // rock beats scissor
-    // paper beats rock
-    // scissor beats rock
-    const beat_direct = {
-        'rock': 'scissor',
-        'paper': 'rock',
-        'scissor': 'paper'
-    }
+    playerSymbol = idToSymbols[playerSelection]
+    computerSymbol = idToSymbols[computerSelection]
     
     if (playerSelection == computerSelection) {
-        return ["It's a Tie", 'tie']
+        return ["Draw", 'tie']
     }
     else if (beat_direct[playerSelection] == computerSelection) {
-        return [`You Win, ${playerSelection} beats ${computerSelection}`, 'player']
+        return [`You Win, ${playerSymbol} beats ${computerSymbol}`, 'player']
     }
     else {
-        return [`You Lose, ${computerSelection} beats ${playerSelection}`, 'computer']
+        return [`You Lose, ${computerSymbol} beats ${playerSymbol}`, 'computer']
     }
 }
 
-/**
- * This function plays 5 rounds of rock, paper, scissor and prints the result
- * @returns {None}: NULL
- */
-function game() {
-    playerTotalWins = 0
-    computerTotalWins = 0
-    // play 5 rounds
-    for (let i = 0; i<5; i++) {
-        const playerSelection = prompt("Rock, Paper or Scissor?")
-        const computerSelection = getComputerChoice()
-        const result = playRound(playerSelection, computerSelection)
+function updateResults(playerChoice, computerChoice, playerTotalWins, computerTotalWins, resultText){
+    const playerChoiceElement = document.getElementById('player-choice');
+    const computerChoiceElement = document.getElementById('computer-choice');
+    const playerScore = document.getElementById('player-score');
+    const computerScore = document.getElementById('computer-score');
+    const result = document.getElementById('result');
 
-        if (result[1] == 'player') {
-            playerTotalWins += 1
-        }
-        else if (result[1] == 'computer') {
-            computerTotalWins += 1
-        }
-        console.log(result[0])
-        console.log(`Player: ${playerTotalWins} Computer: ${computerTotalWins}`)
 
-    }
+    //Updating the player choice and computer choice
+    playerChoiceElement.textContent = idToSymbols[playerChoice]
+    computerChoiceElement.textContent = idToSymbols[computerChoice]
 
-    if (playerTotalWins > computerTotalWins) {
-        console.log("The final result is: You Win!")
-    }
-    else if (playerTotalWins < computerTotalWins) {
-        console.log("The final result is: You Lose!")
-    }
-    else {
-        console.log("The final result is: It's a Tie!")
-}   
+    //Updating the computer score and player score
+    playerScore.textContent = playerTotalWins;
+    computerScore.textContent = computerTotalWins;
+
+    //Updating the text
+    result.textContent = resultText;
+
 }
 
-game();
+let playerTotalWins = 0, computerTotalWins = 0;
+
+function game(){
+    const playerChoice = this.id;
+    const computerChoice = getComputerChoice();
+    
+    const resultArray = playRound(playerChoice, computerChoice);
+    const resultText = resultArray[0];
+    const result = resultArray[1];
+
+    if (result == 'player'){
+        playerTotalWins+=1
+    }
+    else if (result == 'computer'){
+        computerTotalWins+=1
+    }
+
+    updateResults(playerChoice, computerChoice,playerTotalWins, computerTotalWins, resultText);
+    console.log(`player wins: ${playerTotalWins}`);
+    console.log(`computer wins: ${computerTotalWins}`);
+
+    if (playerTotalWins===5 || computerTotalWins===5){
+        winner = playerTotalWins===5 ? 'player' : computerTotalWins===5 ? 'computer': NaN;
+        playerTotalWins = 0, computerTotalWins = 0;
+        window.confirm(`${winner} wins the game!`)
+        return winner
+    }
+}
 
 
+// getting the buttons
+const buttons = document.querySelectorAll('.buttons button');
+
+//adding event listeners to all the buttons
+winner = buttons.forEach(button => {
+    button.addEventListener('click',game)
+})
+
+console.log(winner)
 
 

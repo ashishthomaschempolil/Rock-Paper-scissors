@@ -10,7 +10,8 @@
     <title>Rock, Paper & Scissors!</title>
 </head> 
 <body>
-    <!-- <script src="app.js"></script> -->
+    <script src="./app.js" defer></script> 
+    <!-- We use defer here so that webpage is fully loaded before the js script is fully run -->
     <div class="header">
         <h1>Rock 🪨</h1>
         <h1>Paper 📃</h1>
@@ -22,12 +23,12 @@
                 <div class="player">
                     <h2>🤩</h2>
                     <h3 id="player-choice">?</h3>
-                    <h3 id="player-score">0</h3>
+                    <h4 id="player-score">0</h4>
                 </div>
                 <div class="computer">
                     <h2>🤖</h2>
                     <h3 id="computer-choice">?</h3>
-                    <h3 id="computer-score">0</h3>
+                    <h4 id="computer-score">0</h4>
                 </div>
             </div>
             <div class="result">
@@ -41,13 +42,19 @@
             <div class="buttons">
                 <button class="items" id="rock">🪨</button>
                 <button class="items" id="paper">📃</button>
-                <button class="items" id="scissors">✂️</button>
+                <button class="items" id="scissor">✂️</button>
             </div>
         </div>
     </div>
     <div class="footer">
         <!-- Add a name as well as a github link -->
         <h4> Made by <a href="https://github.com/ashishthomaschempolil" target="_blank">Ashish</a></h4>
+    </div>
+    <div class="overlay" id="overlay"></div>
+    <div class="popup">
+        <h2>Game Over</h2>
+        <h3 id="winner"></h3>
+        <button id="play-again">Play Again</button>
     </div>
     
 </body>

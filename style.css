@@ -93,6 +93,15 @@ h2, h3{
     font-size: 50px;
 }
 
+.choices h3{
+    font-size: 100px;
+}
+
+.choices h4{
+    font-size: 35px;
+    margin: 0;
+}
+
 .result {
     display: flex;
     flex-direction: column;
@@ -132,7 +141,7 @@ h2, h3{
     margin: 0;
 }
 
-button {
+.buttons button {
     cursor: pointer;
     background-color: #f3f4f6;
     border: 1px outset #e9eaec;
@@ -141,15 +150,39 @@ button {
     padding: 50px 50px;
 }
 
-button:hover{ /* when mouse is hovering button */
+.buttons button:hover{ /* when mouse is hovering button */
     transform: translate(0, -5px);
     transition: .1s;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8); /* offset-x | offset-y | blur-radius | color */
 }
 
-button:active{ /* when button is clicked */
+.buttons button:active{ /* when button is clicked */
     /* box-shadow: 0 0 0 #313f7f; */
     transform: translate(0);
     transition: 0s;
     
 }
+
+.overlay {
+    display: none; /*Hide the overlay by default*/
+    position: fixed; /* Cover the entire screen */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* Make the overlay semi-transparent */
+    z-index: 1; /* Place the overlay above other elements */
+  }
+
+.popup {
+    display: none; /* Hide the popup by default */
+    position: fixed; /* Position the popup in the center of the screen */
+    top: 50%; /* Position the popup in the center of the screen */
+    left: 50%; /* Position the popup in the center of the screen */
+    transform: translate(-50%, -50%);
+    background-color: #f3f4f6;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 5px;
+    z-index: 1; /* Make sure the popup is on top of the rest of the content */
+  }
